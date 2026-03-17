@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cuba Libre I — Modern Caribbean art. Trade-only wholesale art by Bad Dog Editions.">
+<title>Cuba Libre I | Bad Dog Editions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #000; --white: #fff; --off-white: #f5f4f0;
+  --grey-light: #e8e6e1; --grey-mid: #9a9590; --grey-dark: #2a2926;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Archivo', 'Helvetica Neue', sans-serif;
+  --h: 80px; --ease: cubic-bezier(0.25,0.46,0.45,0.94);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--black); color: var(--white); overflow-x: hidden; }
+
+/* ANNOUNCEMENT */
+.ann { background: var(--white); color: var(--black); height: 36px; overflow: hidden; display: flex; align-items: center; }
+.ann-track { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; }
+.ann-track span { font-size: 10px; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; padding: 0 48px; }
+.ann-track span em { font-style: normal; color: var(--grey-mid); margin: 0 12px; }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 200; height: var(--h);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
+  background: rgba(0,0,0,.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.h-logo img { height: 34px; display: block; }
+nav { display: flex; gap: 32px; }
+nav a { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: .65; transition: opacity .2s; }
+nav a:hover { opacity: 1; }
+.h-actions { display: flex; align-items: center; gap: 18px; }
+.h-actions a { font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: .65; transition: opacity .2s; }
+.h-actions a:hover { opacity: 1; }
+.h-cart { display: flex; align-items: center; gap: 7px; border: 1px solid rgba(255,255,255,.22); padding: 8px 18px; font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--white); text-decoration: none; transition: background .2s; }
+.h-cart:hover { background: rgba(255,255,255,.1); opacity: 1 !important; }
+
+/* BREADCRUMB */
+.bread { padding: 14px 48px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,.06); background: var(--black); }
+.bread a, .bread span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; text-decoration: none; }
+.bread a { color: var(--grey-mid); transition: color .2s; }
+.bread a:hover { color: var(--white); }
+.bread .sep { color: rgba(255,255,255,.2); }
+.bread .cur { color: var(--white); }
+
+/* PDP SPLIT — 58/42 so left image is large */
+.pdp {
+  display: grid;
+  grid-template-columns: 58% 42%;
+  min-height: calc(100vh - var(--h) - 72px);
+  align-items: start;
+}
+
+/* LEFT: IMAGE PANEL — sticky, fills viewport height */
+.pdp-gallery {
+  position: sticky;
+  top: calc(var(--h) + 72px);
+  height: calc(100vh - var(--h) - 72px);
+  background: #080807;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Main image wrapper fills all remaining space */
+.pdp-main {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+  min-height: 0;
+}
+.pdp-main img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  transition: transform .7s var(--ease);
+}
+.pdp-main:hover img { transform: scale(1.025); }
+.pdp-main.zoomed { cursor: zoom-out; }
+.pdp-main.zoomed img { transform: scale(1.9); transform-origin: var(--ox,50%) var(--oy,50%); }
+
+.zoom-badge {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+  color: rgba(255,255,255,.28); pointer-events: none;
+  display: flex; align-items: center; gap: 5px; transition: opacity .3s;
+}
+.pdp-main:hover .zoom-badge { opacity: 0; }
+
+.vir-btn {
+  position: absolute; top: 14px; right: 14px; z-index: 3;
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.18); color: var(--white);
+  font-family: var(--sans); font-size: 9px; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase; padding: 8px 14px;
+  cursor: pointer; transition: background .2s, border-color .2s;
+}
+.vir-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.5); }
+
+/* Thumbnails — fixed height row at bottom */
+.pdp-thumbs {
+  display: flex; gap: 2px; padding: 2px;
+  background: rgba(0,0,0,.4); border-top: 1px solid rgba(255,255,255,.05);
+  overflow-x: auto; flex-shrink: 0; scrollbar-width: none;
+}
+.pdp-thumbs::-webkit-scrollbar { display: none; }
+.pdp-thumb {
+  flex: 0 0 82px; height: 82px; overflow: hidden; cursor: pointer;
+  border: 1px solid transparent; transition: border-color .2s;
+}
+.pdp-thumb img { width:100%; height:100%; object-fit: cover; display: block; transition: transform .45s var(--ease); }
+.pdp-thumb:hover img { transform: scale(1.07); }
+.pdp-thumb:hover { border-color: rgba(255,255,255,.35); }
+.pdp-thumb.active { border-color: var(--white); }
+
+/* RIGHT: INFO PANEL — scrolls independently, no scrollbar */
+.pdp-info {
+  border-left: 1px solid rgba(255,255,255,.07);
+  padding: 44px 40px 100px;
+  overflow-y: scroll;
+  max-height: calc(100vh - var(--h));
+  scrollbar-width: none;
+}
+.pdp-info::-webkit-scrollbar { display: none; }
+
+.pdp-vendor { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--grey-mid); font-weight: 500; margin-bottom: 8px; }
+.pdp-title { font-family: var(--serif); font-size: clamp(36px,3.5vw,58px); font-weight: 300; line-height: 1.02; color: var(--white); margin-bottom: 5px; }
+.pdp-title em { font-style: italic; }
+.pdp-sku { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.25); font-weight: 500; margin-bottom: 22px; }
+
+.price-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 0; margin-bottom: 26px;
+  border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.price-login { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 300; }
+.price-login a { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; color: var(--white); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 1px; opacity: .7; transition: opacity .2s; }
+.price-login a:hover { opacity: 1; }
+.trade-pill { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--black); background: var(--white); padding: 4px 10px; }
+
+.opt-group { margin-bottom: 22px; }
+.opt-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--white); margin-bottom: 3px; display: flex; align-items: center; justify-content: space-between; }
+.opt-val { font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: none; color: var(--grey-mid); }
+.opt-hint { font-size: 10px; font-weight: 300; color: rgba(255,255,255,.3); margin-bottom: 10px; letter-spacing: .04em; }
+.opt-hint a { color: var(--grey-mid); text-decoration: underline; text-underline-offset: 2px; }
+
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.sw {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid transparent; cursor: pointer;
+  transition: transform .2s, border-color .2s; position: relative;
+}
+.sw:hover { transform: scale(1.18); }
+.sw.active { border-color: var(--white); transform: scale(1.12); }
+.sw[data-n="No Frame"] { background: transparent !important; border: 2px solid rgba(255,255,255,.28); }
+.sw[data-n="No Frame"]::after { content:'✕'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:9px; color:rgba(255,255,255,.45); }
+.sw-tip { position:absolute; bottom:calc(100% + 7px); left:50%; transform:translateX(-50%); background:var(--black); border:1px solid rgba(255,255,255,.14); color:var(--white); font-family:var(--sans); font-size:8px; letter-spacing:.12em; text-transform:uppercase; padding:4px 9px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .18s; z-index:10; }
+.sw:hover .sw-tip { opacity:1; }
+
+.mat-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.mat-btn { font-family:var(--sans); font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; padding:10px 18px; background:transparent; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.6); cursor:pointer; transition:all .2s; }
+.mat-btn:hover { border-color:rgba(255,255,255,.55); color:var(--white); }
+.mat-btn.active { background:var(--white); color:var(--black); border-color:var(--white); }
+
+.mat-cond { display: none; margin-top: 4px; }
+.mat-cond.show { display: block; }
+.mat-note { padding: 10px 14px; background: rgba(255,255,255,.04); border-left: 2px solid rgba(255,255,255,.18); font-size: 11px; font-weight: 300; color: rgba(255,255,255,.55); line-height: 1.65; margin-bottom: 12px; }
+
+.cta-row { display: flex; gap: 10px; margin-bottom: 12px; }
+.qty { display:flex; align-items:center; border:1px solid rgba(255,255,255,.18); flex-shrink:0; }
+.qty-btn { width:38px; height:48px; background:none; border:none; color:var(--white); font-size:18px; font-weight:300; cursor:pointer; transition:background .18s; display:flex; align-items:center; justify-content:center; }
+.qty-btn:hover { background:rgba(255,255,255,.08); }
+.qty-n { width:38px; text-align:center; font-size:13px; font-weight:500; color:var(--white); border-left:1px solid rgba(255,255,255,.1); border-right:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; height:48px; }
+.btn-cart { flex:1; background:var(--white); color:var(--black); font-family:var(--sans); font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:600; border:none; cursor:pointer; padding:0 24px; height:48px; display:flex; align-items:center; justify-content:center; gap:9px; transition:background .2s, transform .2s; }
+.btn-cart:hover { background:var(--off-white); transform:translateY(-1px); }
+.btn-trade { width:100%; background:transparent; color:var(--white); font-family:var(--sans); font-size:10px; letter-spacing:.2em; text-transform:uppercase; font-weight:500; border:1px solid rgba(255,255,255,.2); cursor:pointer; padding:14px; margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:9px; transition:background .2s, border-color .2s; }
+.btn-trade:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.45); }
+
+.disclaimer { font-size:10px; color:rgba(255,255,255,.3); letter-spacing:.05em; line-height:1.65; margin-bottom:22px; padding:10px 14px; border:1px dashed rgba(255,255,255,.1); }
+.disclaimer a { color:rgba(255,255,255,.55); text-decoration:underline; text-underline-offset:2px; }
+
+.trust { display:flex; border:1px solid rgba(255,255,255,.07); margin-bottom:26px; }
+.t-badge { flex:1; padding:14px 10px; text-align:center; border-right:1px solid rgba(255,255,255,.07); transition:background .2s; }
+.t-badge:last-child { border-right:none; }
+.t-badge:hover { background:rgba(255,255,255,.03); }
+.t-badge svg { width:17px; height:17px; color:var(--grey-mid); display:block; margin:0 auto 5px; }
+.t-badge span { font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.3); font-weight:500; display:block; }
+
+.acc-item { border-top:1px solid rgba(255,255,255,.08); }
+.acc-item:last-child { border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:22px; }
+.acc-btn { width:100%; background:none; border:none; color:var(--white); font-family:var(--sans); font-size:10px; letter-spacing:.2em; text-transform:uppercase; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:16px 0; text-align:left; transition:color .2s; }
+.acc-btn:hover { color:rgba(255,255,255,.65); }
+.acc-icon { width:16px; height:16px; position:relative; flex-shrink:0; }
+.acc-icon::before, .acc-icon::after { content:''; position:absolute; background:currentColor; }
+.acc-icon::before { width:12px; height:1px; top:50%; left:50%; transform:translate(-50%,-50%); }
+.acc-icon::after { width:1px; height:12px; top:50%; left:50%; transform:translate(-50%,-50%); transition:transform .3s var(--ease), opacity .3s; }
+.acc-btn.open .acc-icon::after { transform:translate(-50%,-50%) rotate(90deg); opacity:0; }
+.acc-body { max-height:0; overflow:hidden; transition:max-height .4s var(--ease), padding .3s; }
+.acc-body.open { max-height:500px; padding-bottom:18px; }
+.acc-body p, .acc-body li { font-size:13px; font-weight:300; line-height:1.85; color:rgba(255,255,255,.55); }
+.acc-body ul { padding-left:16px; }
+.acc-body li { margin-bottom:3px; }
+.acc-note { font-size:10px !important; color:rgba(255,255,255,.25) !important; margin-top:8px; }
+
+.share-row { display:flex; align-items:center; gap:14px; padding:18px 0; border-top:1px solid rgba(255,255,255,.07); }
+.share-lbl { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--grey-mid); font-weight:500; }
+.share-links { display:flex; gap:14px; }
+.share-links a { font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.3); text-decoration:none; font-weight:500; transition:color .2s; }
+.share-links a:hover { color:var(--white); }
+
+/* RELATED */
+.related { padding:80px 48px; background:var(--black); }
+.sec-eyebrow { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--grey-mid); font-weight:500; margin-bottom:10px; }
+.sec-title { font-family:var(--serif); font-size:clamp(28px,3vw,48px); font-weight:300; color:var(--white); line-height:1; }
+.sec-title em { font-style:italic; }
+.rel-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:36px; }
+.view-all-link { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--white); text-decoration:none; font-weight:500; opacity:.55; border-bottom:1px solid rgba(255,255,255,.25); padding-bottom:3px; transition:opacity .2s; }
+.view-all-link:hover { opacity:1; }
+.rel-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.rel-card { cursor:pointer; }
+.rel-img { position:relative; overflow:hidden; aspect-ratio:2/3; background:#1a1815; margin-bottom:11px; }
+.rel-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease); }
+.rel-card:hover .rel-img img { transform:scale(1.05); }
+.rel-overlay { position:absolute; inset:0; background:rgba(0,0,0,0); transition:background .3s; display:flex; align-items:flex-end; padding:10px; }
+.rel-card:hover .rel-overlay { background:rgba(0,0,0,.28); }
+.rel-cta { width:100%; background:var(--white); color:var(--black); font-family:var(--sans); font-size:9px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; padding:10px; text-align:center; text-decoration:none; display:block; opacity:0; transform:translateY(5px); transition:opacity .3s, transform .3s; }
+.rel-card:hover .rel-cta { opacity:1; transform:translateY(0); }
+.rel-dot { position:absolute; top:9px; right:9px; width:25px; height:25px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; text-decoration:none; z-index:2; box-shadow:0 2px 8px rgba(0,0,0,.4); transition:transform .2s; }
+.rel-dot:hover { transform:scale(1.12); }
+.rel-dot svg { width:10px; height:10px; color:var(--black); }
+.rel-name { font-family:var(--serif); font-size:15px; font-weight:400; color:var(--white); margin-bottom:3px; }
+.rel-meta { font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--grey-mid); font-weight:500; margin-bottom:7px; }
+.rel-sw { display:flex; gap:5px; }
+.rsw { width:10px; height:10px; border-radius:50%; border:1px solid rgba(255,255,255,.2); cursor:pointer; transition:transform .18s; }
+.rsw:hover { transform:scale(1.35); }
+
+/* VIDEO BANNER */
+.vid-banner { position:relative; height:62vh; min-height:380px; overflow:hidden; display:flex; align-items:center; }
+.vid-banner video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.48; }
+.vid-overlay { position:absolute; inset:0; background:linear-gradient(108deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.4) 55%, transparent 100%); }
+.vid-content { position:relative; z-index:2; padding:0 80px; max-width:580px; }
+.vid-content .ey { font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.45); font-weight:500; margin-bottom:14px; }
+.vid-content h2 { font-family:var(--serif); font-size:clamp(30px,4vw,64px); font-weight:300; line-height:.98; color:var(--white); margin-bottom:16px; }
+.vid-content h2 em { font-style:italic; }
+.vid-content p { font-size:13px; font-weight:300; color:rgba(255,255,255,.55); line-height:1.8; max-width:380px; }
+
+/* FAQ */
+.pdp-faq { background:var(--off-white); color:var(--black); padding:80px 48px; }
+.pdp-faq .sec-eyebrow { color:var(--grey-mid); }
+.pdp-faq .sec-title { color:var(--black); margin-bottom:48px; }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.faq-item { padding:22px 0; border-top:1px solid rgba(0,0,0,.1); cursor:pointer; }
+.faq-item:nth-child(odd) { padding-right:36px; border-right:1px solid rgba(0,0,0,.1); }
+.faq-item:nth-child(even) { padding-left:36px; }
+.faq-q { font-size:11px; font-weight:600; letter-spacing:.06em; color:var(--black); margin-bottom:8px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.faq-ico { flex-shrink:0; font-size:15px; color:var(--grey-mid); line-height:1; }
+.faq-a { font-size:12px; font-weight:300; line-height:1.8; color:rgba(0,0,0,.5); max-height:0; overflow:hidden; transition:max-height .4s var(--ease); }
+.faq-a.open { max-height:180px; }
+
+/* MODAL */
+.modal { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:999; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .32s var(--ease); }
+.modal.active { opacity:1; pointer-events:all; }
+.modal-box { background:var(--grey-dark); max-width:840px; width:92%; position:relative; transform:translateY(20px); transition:transform .38s var(--ease); }
+.modal.active .modal-box { transform:translateY(0); }
+.modal-img { position:relative; }
+.modal-img img { width:100%; display:block; filter:brightness(.6) saturate(.3); }
+.modal-art { position:absolute; top:18%; left:50%; transform:translateX(-50%); width:26%; filter:drop-shadow(0 6px 28px rgba(0,0,0,.6)); transition:width .25s; }
+.modal-art img { width:100%; display:block; }
+.modal-close { position:absolute; top:14px; right:14px; width:34px; height:34px; background:rgba(0,0,0,.65); border:1px solid rgba(255,255,255,.2); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--white); font-size:14px; transition:background .2s; }
+.modal-close:hover { background:rgba(0,0,0,.9); }
+.modal-ctrl { padding:18px 24px; display:flex; align-items:center; gap:14px; }
+.modal-lbl { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--grey-mid); font-weight:500; }
+input[type=range] { flex:1; accent-color:var(--white); height:2px; cursor:pointer; }
+.modal-dis { padding:0 24px 16px; font-size:9px; color:rgba(255,255,255,.28); line-height:1.6; }
+
+/* FOOTER */
+footer { background:var(--black); border-top:1px solid rgba(255,255,255,.07); padding:80px 48px 36px; }
+.ft { display:grid; grid-template-columns:1.5fr 1fr 1fr 1.2fr; gap:48px; margin-bottom:60px; }
+.ft-logo-img { height:34px; display:block; margin-bottom:14px; }
+.ft-tag { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-mid); font-weight:300; line-height:1.7; margin-bottom:24px; }
+.ft-contact a { display:block; font-size:12px; color:rgba(255,255,255,.45); text-decoration:none; font-weight:300; margin-bottom:5px; transition:color .2s; }
+.ft-contact a:hover { color:var(--white); }
+.ft-title { font-size:9px; letter-spacing:.28em; text-transform:uppercase; font-weight:600; color:var(--white); margin-bottom:18px; }
+.ft-col a { display:block; font-size:12px; color:rgba(255,255,255,.4); text-decoration:none; font-weight:300; margin-bottom:9px; letter-spacing:.04em; transition:color .2s; }
+.ft-col a:hover { color:var(--white); }
+.ft-form { display:flex; margin-top:7px; }
+.ft-form input { flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-right:none; color:var(--white); font-family:var(--sans); font-size:11px; padding:11px 14px; outline:none; }
+.ft-form input::placeholder { color:rgba(255,255,255,.28); }
+.ft-form button { background:var(--white); color:var(--black); border:none; font-family:var(--sans); font-size:9px; letter-spacing:.2em; text-transform:uppercase; font-weight:600; padding:11px 18px; cursor:pointer; }
+.ft-social { display:flex; gap:14px; margin-top:18px; }
+.ft-social a { font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.35); text-decoration:none; font-weight:500; transition:color .2s; }
+.ft-social a:hover { color:var(--white); }
+.ft-bottom { display:flex; align-items:center; justify-content:space-between; padding-top:24px; border-top:1px solid rgba(255,255,255,.06); }
+.ft-bottom p { font-size:10px; color:rgba(255,255,255,.2); letter-spacing:.08em; }
+.ft-legal { display:flex; gap:22px; }
+.ft-legal a { font-size:10px; color:rgba(255,255,255,.2); text-decoration:none; letter-spacing:.08em; transition:color .2s; }
+.ft-legal a:hover { color:rgba(255,255,255,.55); }
+
+/* FADE UP */
+.fu { opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+.fu.vis { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .pdp { grid-template-columns:1fr; }
+  .pdp-gallery { position:relative; top:auto; height:72vw; min-height:300px; }
+  .pdp-info { border-left:none; border-top:1px solid rgba(255,255,255,.07); max-height:none; padding:32px 24px 80px; }
+  header { padding:0 20px; } nav { display:none; }
+  .bread { padding:12px 20px; }
+  .rel-grid { grid-template-columns:repeat(2,1fr); }
+  .ft { grid-template-columns:1fr 1fr; }
+  .faq-grid { grid-template-columns:1fr; }
+  .faq-item:nth-child(odd) { padding-right:0; border-right:none; }
+  .faq-item:nth-child(even) { padding-left:0; }
+  .vid-content { padding:0 28px; }
+  .related,.pdp-faq { padding:60px 24px; }
+}
+@media(max-width:600px){
+  .rel-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+  .ft { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="ann" role="banner">
+  <div class="ann-track">
+    <span>Trade-Only Wholesale Art <em>—</em> Shipping = 20% of Order <em>—</em> 2,000+ Exclusive Works <em>—</em> 21–28 Business Day Processing <em>—</em> Customizable Framing & Finishes <em>—</em></span>
+    <span>Trade-Only Wholesale Art <em>—</em> Shipping = 20% of Order <em>—</em> 2,000+ Exclusive Works <em>—</em> 21–28 Business Day Processing <em>—</em> Customizable Framing & Finishes <em>—</em></span>
+  </div>
+</div>
+
+<!-- Header -->
+<header role="banner">
+  <a href="baddogeditions-mockup.html" class="h-logo" aria-label="Bad Dog Editions home">
+    <img src="https://baddogeditions.com/cdn/shop/files/Baddog_Logo_final_White_nobackground_copy_2.png?v=1752266755&width=320" alt="Bad Dog Editions">
+  </a>
+  <nav role="navigation" aria-label="Main">
+    <a href="baddogeditions-mockup.html">Home</a>
+    <a href="#">Our Story</a>
+    <a href="#">The Collection</a>
+    <a href="#">Unleashed</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="h-actions">
+    <a href="#">Login</a>
+    <a href="#" class="h-cart">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Cart (0)
+    </a>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<nav class="bread" aria-label="Breadcrumb">
+  <a href="baddogeditions-mockup.html">Home</a>
+  <span class="sep">—</span>
+  <a href="#">The Collection</a>
+  <span class="sep">—</span>
+  <span class="cur" aria-current="page">Cuba Libre I</span>
+</nav>
+
+<!-- PDP -->
+<div class="pdp" role="main">
+
+  <!-- LEFT: Gallery -->
+  <div class="pdp-gallery" aria-label="Product images">
+    <div class="pdp-main" id="mainWrap">
+      <img id="mainImg"
+        src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=2000"
+        alt="Cuba Libre I — Modern Caribbean art with layered colors and expressive rhythm">
+      <button class="vir-btn" id="virBtn" aria-label="View artwork in a room">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+        View In Room
+      </button>
+      <div class="zoom-badge" aria-hidden="true">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+        Click to zoom
+      </div>
+    </div>
+    <div class="pdp-thumbs" role="list" aria-label="Image thumbnails">
+      <div class="pdp-thumb active" role="listitem" tabindex="0"
+        data-src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=1600">
+        <img src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=200" alt="Cuba Libre I main view">
+      </div>
+      <div class="pdp-thumb" role="listitem" tabindex="0"
+        data-src="https://baddogeditions.com/cdn/shop/files/DGEN-0019-Colorful_Reef_III.png?v=1752682797&width=1600">
+        <img src="https://baddogeditions.com/cdn/shop/files/DGEN-0019-Colorful_Reef_III.png?v=1752682797&width=200" alt="Detail view">
+      </div>
+      <div class="pdp-thumb" role="listitem" tabindex="0"
+        data-src="https://baddogeditions.com/cdn/shop/files/flatlay-of-clean-paint-brushes-on-a-black-surface.jpg?v=1752267777&width=1600">
+        <img src="https://baddogeditions.com/cdn/shop/files/flatlay-of-clean-paint-brushes-on-a-black-surface.jpg?v=1752267777&width=200" alt="Process">
+      </div>
+      <div class="pdp-thumb" role="listitem" tabindex="0"
+        data-src="https://baddogeditions.com/cdn/shop/products/00197-Beautiful_Otherness_IV.jpeg?v=1751625729&width=1600">
+        <img src="https://baddogeditions.com/cdn/shop/products/00197-Beautiful_Otherness_IV.jpeg?v=1751625729&width=200" alt="Series">
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Info -->
+  <aside class="pdp-info" aria-label="Product details and purchase options">
+
+    <p class="pdp-vendor">Bad Dog Editions</p>
+    <h1 class="pdp-title">Cuba <em>Libre I</em></h1>
+    <p class="pdp-sku">Item #: 2087</p>
+
+    <div class="price-row">
+      <div class="price-login">
+        <span>Price —</span>
+        <a href="https://baddogeditions.com/pages/contact-us">Login to view</a>
+      </div>
+      <span class="trade-pill">Trade Only</span>
+    </div>
+
+    <!-- Frame Colour -->
+    <div class="opt-group">
+      <div class="opt-label">Frame Colour <span class="opt-val" id="frameVal">No Frame</span></div>
+      <p class="opt-hint">Frame colour affects final price. <a href="#">View frame guide</a></p>
+      <div class="swatches" role="radiogroup" aria-label="Frame colour">
+        <div class="sw active" data-n="No Frame" role="radio" aria-checked="true" tabindex="0"><span class="sw-tip">No Frame</span></div>
+        <div class="sw" data-n="Beach" style="background:#c8a96e" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Beach</span></div>
+        <div class="sw" data-n="Black" style="background:#111" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Black</span></div>
+        <div class="sw" data-n="Ebony" style="background:#1a0f0a" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Ebony</span></div>
+        <div class="sw" data-n="Espresso" style="background:#3b2510" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Espresso</span></div>
+        <div class="sw" data-n="Gold" style="background:#b8960c" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Gold</span></div>
+        <div class="sw" data-n="Grey" style="background:#888" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Grey</span></div>
+        <div class="sw" data-n="Silver" style="background:#c0c0c0" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Silver</span></div>
+        <div class="sw" data-n="Teak" style="background:#8b5e3c" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Teak</span></div>
+        <div class="sw" data-n="Walnut" style="background:#4a2c0a" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">Walnut</span></div>
+        <div class="sw" data-n="White" style="background:#f0eeea;border-color:rgba(255,255,255,.4)" role="radio" aria-checked="false" tabindex="0"><span class="sw-tip">White</span></div>
+      </div>
+    </div>
+
+    <!-- Material -->
+    <div class="opt-group">
+      <div class="opt-label">Material <span class="opt-val" id="matVal">Canvas</span></div>
+      <p class="opt-hint">Paper requires a frame selection to proceed.</p>
+      <div class="mat-btns" role="radiogroup" aria-label="Material">
+        <button class="mat-btn active" data-m="Canvas" aria-pressed="true">Canvas</button>
+        <button class="mat-btn" data-m="Paper" aria-pressed="false">Paper</button>
+      </div>
+    </div>
+
+    <!-- Mat Option — shown only when Paper selected -->
+    <div class="opt-group mat-cond" id="matCond">
+      <div class="opt-label">Mat Option <span class="opt-val" id="matOptVal">Archival White Mat</span></div>
+      <div class="mat-note">The 8-ply archival white mat is acid-free and UV-resistant, ensuring your print's longevity. Recommended for all paper editions.</div>
+      <div class="mat-btns" role="radiogroup" aria-label="Mat option">
+        <button class="mat-btn active" data-mo="Add 8-ply archival white mat" aria-pressed="true">Add Archival Mat</button>
+        <button class="mat-btn" data-mo="No Mat" aria-pressed="false">No Mat</button>
+      </div>
+      <p class="opt-hint" style="margin-top:10px;">* Mat pricing included in trade quote. <a href="https://baddogeditions.com/pages/contact-us">Contact us</a> for details.</p>
+    </div>
+
+    <!-- Qty + Add to Cart -->
+    <div class="cta-row">
+      <div class="qty" aria-label="Quantity">
+        <button class="qty-btn" id="qtyMinus" aria-label="Decrease">−</button>
+        <div class="qty-n" id="qtyN" aria-live="polite">1</div>
+        <button class="qty-btn" id="qtyPlus" aria-label="Increase">+</button>
+      </div>
+      <button class="btn-cart" id="addCart">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Add to Cart
+      </button>
+    </div>
+
+    <button class="btn-trade" onclick="location.href='https://baddogeditions.com/pages/contact-us'">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Request Trade Pricing
+    </button>
+
+    <p class="disclaimer" role="note">
+      <strong>Trade accounts only.</strong> Pricing is exclusively available to approved design professionals.
+      <a href="https://baddogeditions.com/pages/contact-us">Request an account</a> or
+      <a href="https://baddogeditions.com/account/login">log in</a> to view wholesale pricing.
+    </p>
+
+    <!-- Trust badges -->
+    <div class="trust" aria-label="Service guarantees">
+      <div class="t-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Satisfaction Guarantee</span>
+      </div>
+      <div class="t-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8zM5.5 21a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 21a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+        <span>Secure Packaging</span>
+      </div>
+      <div class="t-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <span>21–28 Day Process</span>
+      </div>
+    </div>
+
+    <!-- Accordions -->
+    <div class="acc-item">
+      <button class="acc-btn open" aria-expanded="true">Description<span class="acc-icon"></span></button>
+      <div class="acc-body open">
+        <p><em>Cuba Libre I</em> explodes with energy and cultural flair. This modern Caribbean art piece layers vibrant colour and freeform movement, evoking the rhythms and textures of Havana's streets. A bold expression of contemporary island spirit.</p>
+        <br><p>Pairs well with: <a href="https://baddogeditions.com/products/cuba-libre-ii" style="color:var(--grey-mid);text-decoration:underline;text-underline-offset:2px">Cuba Libre II</a>, <a href="https://baddogeditions.com/products/cuba-libre-iii" style="color:var(--grey-mid);text-decoration:underline;text-underline-offset:2px">Cuba Libre III</a></p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false">Materials & Specifications<span class="acc-icon"></span></button>
+      <div class="acc-body">
+        <ul>
+          <li>Available on archival canvas or fine-art paper</li>
+          <li>Canvas: gallery-wrapped, 1.5" deep stretcher bars</li>
+          <li>Paper: giclée on 300gsm heavyweight cotton rag</li>
+          <li>UV-resistant inks, rated 70+ years under glass</li>
+          <li>11 frame finishes — all hand-finished hardwood</li>
+          <li>Dimensions: outside frame, ±1/8" tolerance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false">Shipping & Lead Time<span class="acc-icon"></span></button>
+      <div class="acc-body">
+        <ul>
+          <li>Processing: 21–28 business days</li>
+          <li>Shipping: 20% of order total</li>
+          <li>All orders fully insured in transit</li>
+          <li>Damage replacement shipped within 72 hours</li>
+        </ul>
+        <p class="acc-note">* Lead times may vary during peak periods.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" aria-expanded="false">Care & Display<span class="acc-icon"></span></button>
+      <div class="acc-body">
+        <ul>
+          <li>Avoid prolonged direct sunlight</li>
+          <li>Dust with a soft dry cloth — no solvents</li>
+          <li>Canvas needs no glass; paper should be glazed</li>
+          <li>Maintain 45–55% RH to prevent warping</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Share -->
+    <div class="share-row">
+      <span class="share-lbl">Share</span>
+      <div class="share-links">
+        <a href="https://www.facebook.com/sharer.php?u=https://baddogeditions.com/products/modern-caribbean-art" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text=Cuba+Libre+I&url=https://baddogeditions.com/products/modern-caribbean-art" target="_blank" rel="noopener">X</a>
+        <a href="https://pinterest.com/pin/create/button/?url=https://baddogeditions.com/products/modern-caribbean-art" target="_blank" rel="noopener">Pinterest</a>
+        <a href="mailto:?subject=Cuba Libre I&body=https://baddogeditions.com/products/modern-caribbean-art">Email</a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- Related Products -->
+<section class="related" aria-labelledby="rel-title">
+  <div class="rel-header fu">
+    <div>
+      <p class="sec-eyebrow">You May Also Like</p>
+      <h2 class="sec-title" id="rel-title">Related <em>Works</em></h2>
+    </div>
+    <a href="https://baddogeditions.com/collections/art-collection" class="view-all-link">View All</a>
+  </div>
+  <div class="rel-grid">
+    <article class="rel-card fu">
+      <div class="rel-img">
+        <img src="https://baddogeditions.com/cdn/shop/files/DGEN-0019-Colorful_Reef_III.png?v=1752682797&width=600" alt="Colorful Reef III" loading="lazy">
+        <a href="https://baddogeditions.com/pages/contact-us" class="rel-dot" aria-label="Login to view price" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <div class="rel-overlay"><a href="https://baddogeditions.com/products/abstract-reef-painting-coral-red-black" class="rel-cta" onclick="event.stopPropagation()">View Options</a></div>
+      </div>
+      <p class="rel-meta">Bad Dog Editions</p>
+      <h3 class="rel-name">Colorful Reef III</h3>
+      <div class="rel-sw"><span class="rsw" style="background:#f5f0e8"></span><span class="rsw" style="background:#c8a96e"></span><span class="rsw" style="background:#111"></span><span class="rsw" style="background:#2a1f14"></span></div>
+    </article>
+    <article class="rel-card fu" style="transition-delay:.1s">
+      <div class="rel-img">
+        <img src="https://baddogeditions.com/cdn/shop/products/00197-Beautiful_Otherness_IV.jpeg?v=1751625729&width=600" alt="Beautiful Otherness IV" loading="lazy">
+        <a href="https://baddogeditions.com/pages/contact-us" class="rel-dot" aria-label="Login to view price" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <div class="rel-overlay"><a href="https://baddogeditions.com/products/elegant-abstract-painting" class="rel-cta" onclick="event.stopPropagation()">View Options</a></div>
+      </div>
+      <p class="rel-meta">Bad Dog Editions</p>
+      <h3 class="rel-name">Beautiful Otherness IV</h3>
+      <div class="rel-sw"><span class="rsw" style="background:#f5f0e8"></span><span class="rsw" style="background:#c8a96e"></span><span class="rsw" style="background:#111"></span><span class="rsw" style="background:#2a1f14"></span></div>
+    </article>
+    <article class="rel-card fu" style="transition-delay:.2s">
+      <div class="rel-img">
+        <img src="https://baddogeditions.com/cdn/shop/products/01364-SPECTRAL_20STEMS_20II.jpeg?v=1751623211&width=600" alt="Spectral Stems II" loading="lazy">
+        <a href="https://baddogeditions.com/pages/contact-us" class="rel-dot" aria-label="Login to view price" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <div class="rel-overlay"><a href="https://baddogeditions.com/products/spectral-stems-ii" class="rel-cta" onclick="event.stopPropagation()">View Options</a></div>
+      </div>
+      <p class="rel-meta">Bad Dog Editions</p>
+      <h3 class="rel-name">Spectral Stems II</h3>
+      <div class="rel-sw"><span class="rsw" style="background:#f5f0e8"></span><span class="rsw" style="background:#c8a96e"></span><span class="rsw" style="background:#111"></span><span class="rsw" style="background:#2a1f14"></span></div>
+    </article>
+    <article class="rel-card fu" style="transition-delay:.3s">
+      <div class="rel-img">
+        <img src="https://baddogeditions.com/cdn/shop/products/01821-Sunburst_20III_8b0d7690-8464-4ce9-ab00-a84526bde530.jpeg?v=1751456655&width=600" alt="Sunburst III" loading="lazy">
+        <a href="https://baddogeditions.com/pages/contact-us" class="rel-dot" aria-label="Login to view price" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <div class="rel-overlay"><a href="https://baddogeditions.com/products/sunburst-iii" class="rel-cta" onclick="event.stopPropagation()">View Options</a></div>
+      </div>
+      <p class="rel-meta">Bad Dog Editions</p>
+      <h3 class="rel-name">Sunburst III</h3>
+      <div class="rel-sw"><span class="rsw" style="background:#f5f0e8"></span><span class="rsw" style="background:#c8a96e"></span><span class="rsw" style="background:#111"></span><span class="rsw" style="background:#2a1f14"></span></div>
+    </article>
+  </div>
+</section>
+
+<!-- Video Banner — after Related -->
+<section class="vid-banner" aria-label="Brand video">
+  <video autoplay muted loop playsinline
+    poster="https://baddogeditions.com/cdn/shop/files/preview_images/35ba260705194cb6a348edcd09e09886.thumbnail.0000000000.jpg?v=1746402150"
+    aria-hidden="true">
+    <source src="https://baddogeditions.com/cdn/shop/videos/c/vp/35ba260705194cb6a348edcd09e09886/35ba260705194cb6a348edcd09e09886.SD-480p-0.9Mbps-47001666.mp4?v=0" type="video/mp4">
+  </video>
+  <div class="vid-overlay" aria-hidden="true"></div>
+  <div class="vid-content">
+    <p class="ey">The Philosophy</p>
+    <h2>Art that hits<br><em>different.</em></h2>
+    <p>Over 2,000 exclusive works. Unlimited framing. Made for designers who refuse to settle.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="pdp-faq" aria-labelledby="faq-title">
+  <p class="sec-eyebrow">Need to Know</p>
+  <h2 class="sec-title" id="faq-title">Frequently Asked <em>Questions</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How do I find a specific item? <span class="faq-ico">+</span></div>
+      <div class="faq-a">Use the search field to enter the title, keyword, or item number. You can also browse by collection or contact our team directly.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Does the image accurately represent what I'll receive? <span class="faq-ico">+</span></div>
+      <div class="faq-a">Our website images come directly from our print files. Since screens are backlit, colours may appear slightly different. Physical pieces often look even better in person.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How accurate are the listed dimensions? <span class="faq-ico">+</span></div>
+      <div class="faq-a">Listed sizes reflect outside frame dimensions. Variations are minimal — no more than 1/8" (0.125"). Contact us for exact specifications.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is my package insured? <span class="faq-ico">+</span></div>
+      <div class="faq-a">Yes. We guarantee your satisfaction and will replace any lost or damaged artwork. Photograph any damage on arrival and contact us — we'll ship a replacement within 72 hours.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">What is the difference between Canvas and Paper? <span class="faq-ico">+</span></div>
+      <div class="faq-a">Canvas prints are gallery-wrapped and ready to hang. Paper editions are giclée on 300gsm cotton rag — they require framing and are recommended with an archival mat.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How do I contact you for urgent requests? <span class="faq-ico">+</span></div>
+      <div class="faq-a">Email info@baddogeditions.com or call (407) 826-1197. We respond within 24 hours on weekdays. Include your order number and photographs for urgent replacements.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="ft">
+    <div>
+      <img src="https://baddogeditions.com/cdn/shop/files/Baddog_Logo_final_White_nobackground_copy_2.png?v=1752266755&width=320" alt="Bad Dog Editions" class="ft-logo-img">
+      <p class="ft-tag">A New Breed of<br>Trade-Only Wholesale Art</p>
+      <div class="ft-contact">
+        <a href="mailto:info@baddogeditions.com">info@baddogeditions.com</a>
+        <a href="tel:+14078261197">(407) 826-1197</a>
+      </div>
+      <div class="ft-social">
+        <a href="https://www.instagram.com/baddogeditions/">Instagram</a>
+        <a href="https://www.facebook.com/share/1fee73bUUB/">Facebook</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <p class="ft-title">Quick Links</p>
+      <a href="#">Search</a>
+      <a href="https://baddogeditions.com/pages/faqs">FAQs</a>
+      <a href="https://baddogeditions.com/pages/about-us-1">About Us</a>
+      <a href="https://baddogeditions.com/pages/contact-us">Contact</a>
+    </div>
+    <div class="ft-col">
+      <p class="ft-title">Collections</p>
+      <a href="https://baddogeditions.com/collections/art-collection">All Editions</a>
+      <a href="https://baddogeditions.com/collections/2026-releases">2026 Releases</a>
+      <a href="https://baddogeditions.com/collections/the-winter-edit">Winter Edit</a>
+      <a href="https://baddogeditions.com/collections/bestsellers">Studio Selects</a>
+    </div>
+    <div>
+      <p class="ft-title">Stay in the Loop</p>
+      <p style="font-size:12px;color:rgba(255,255,255,.38);font-weight:300;margin-bottom:14px;line-height:1.6;">Weekly releases and trade updates.</p>
+      <form class="ft-form" onsubmit="return false;" aria-label="Newsletter signup">
+        <input type="email" placeholder="Your email address" autocomplete="email">
+        <button type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Bad Dog Editions. Powered by Shopify.</p>
+    <div class="ft-legal">
+      <a href="https://baddogeditions.com/policies/refund-policy">Refund Policy</a>
+      <a href="https://baddogeditions.com/policies/terms-of-service">Terms of Service</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- View In Room Modal -->
+<div class="modal" id="virModal" role="dialog" aria-modal="true" aria-label="View artwork in room"
+  onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('virModal').classList.remove('active')" aria-label="Close">✕</button>
+    <div class="modal-img">
+      <img src="https://baddogeditions.com/cdn/shop/files/flatlay-of-clean-paint-brushes-on-a-black-surface.jpg?v=1752267777&width=1600" alt="Room setting">
+      <div class="modal-art" id="modalArt">
+        <img src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=600" alt="Cuba Libre I in room">
+      </div>
+    </div>
+    <div class="modal-ctrl">
+      <span class="modal-lbl">Size</span>
+      <input type="range" min="15" max="45" value="26" aria-label="Artwork size in room"
+        oninput="
+          document.getElementById('modalArt').style.width=this.value+'%';
+          var v=+this.value;
+          document.getElementById('sizeOut').textContent=v<20?'Small':v<30?'Medium':v<40?'Large':'X-Large';
+        ">
+      <span class="modal-lbl" id="sizeOut">Medium</span>
+    </div>
+    <p class="modal-dis">* Approximate visualisation only. Actual proportions and colours will vary. Contact us for precise sizing guidance.</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* Scroll fade-up */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+  /* Thumbnails */
+  document.querySelectorAll('.pdp-thumb').forEach(thumb => {
+    const activate = function () {
+      document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const img = document.getElementById('mainImg');
+      img.style.opacity = '0';
+      img.style.transform = 'scale(0.97)';
+      setTimeout(() => {
+        img.src = thumb.dataset.src;
+        img.style.transition = 'opacity .35s, transform .35s';
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+      }, 160);
+      document.getElementById('mainWrap').classList.remove('zoomed');
+    };
+    thumb.addEventListener('click', activate);
+    thumb.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+  });
+
+  /* Zoom on click */
+  const mainWrap = document.getElementById('mainWrap');
+  mainWrap.addEventListener('click', function (e) {
+    const r = this.getBoundingClientRect();
+    this.style.setProperty('--ox', ((e.clientX - r.left) / r.width * 100) + '%');
+    this.style.setProperty('--oy', ((e.clientY - r.top) / r.height * 100) + '%');
+    this.classList.toggle('zoomed');
+  });
+
+  /* Frame swatches */
+  document.querySelectorAll('.sw').forEach(sw => {
+    const pick = function () {
+      document.querySelectorAll('.sw').forEach(s => { s.classList.remove('active'); s.setAttribute('aria-checked', 'false'); });
+      sw.classList.add('active'); sw.setAttribute('aria-checked', 'true');
+      document.getElementById('frameVal').textContent = sw.dataset.n;
+    };
+    sw.addEventListener('click', pick);
+    sw.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+  });
+
+  /* Material */
+  document.querySelectorAll('.mat-btn[data-m]').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.mat-btn[data-m]').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+      this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
+      document.getElementById('matVal').textContent = this.dataset.m;
+      document.getElementById('matCond').classList.toggle('show', this.dataset.m === 'Paper');
+    });
+  });
+
+  /* Mat option */
+  document.querySelectorAll('.mat-btn[data-mo]').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.mat-btn[data-mo]').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+      this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
+      document.getElementById('matOptVal').textContent = this.dataset.mo === 'No Mat' ? 'No Mat' : 'Archival White Mat';
+    });
+  });
+
+  /* Quantity */
+  let qty = 1;
+  document.getElementById('qtyMinus').addEventListener('click', () => { qty = Math.max(1, qty - 1); document.getElementById('qtyN').textContent = qty; });
+  document.getElementById('qtyPlus').addEventListener('click', () => { qty++; document.getElementById('qtyN').textContent = qty; });
+
+  /* Add to Cart */
+  document.getElementById('addCart').addEventListener('click', function () {
+    const orig = this.innerHTML;
+    this.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Added!';
+    this.style.cssText = 'background:#111;color:#fff';
+    setTimeout(() => { this.innerHTML = orig; this.style.cssText = ''; }, 2000);
+  });
+
+  /* Accordion */
+  document.querySelectorAll('.acc-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const body = this.nextElementSibling;
+      const open = body.classList.contains('open');
+      this.classList.toggle('open', !open);
+      this.setAttribute('aria-expanded', String(!open));
+      body.classList.toggle('open', !open);
+    });
+  });
+
+  /* FAQ */
+  window.toggleFaq = function (item) {
+    const a = item.querySelector('.faq-a');
+    const ico = item.querySelector('.faq-ico');
+    const open = a.classList.contains('open');
+    a.classList.toggle('open', !open);
+    ico.textContent = open ? '+' : '−';
+  };
+
+  /* View In Room */
+  document.getElementById('virBtn').addEventListener('click', () => {
+    document.getElementById('virModal').classList.add('active');
+  });
+
+});
+</script>
+</body>
+</html>

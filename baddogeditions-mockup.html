@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Bad Dog Editions — A New Breed of Trade-Only Wholesale Art. Curated program art for designers who demand more.">
+<title>Bad Dog Editions | A New Breed of Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --off-white: #f5f4f0;
+    --grey-light: #e8e6e1;
+    --grey-mid: #9a9590;
+    --grey-dark: #2a2926;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Archivo', 'Helvetica Neue', sans-serif;
+    --header-h: 80px;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* Announcement Bar */
+  .announcement {
+    background: var(--white);
+    color: var(--black);
+    overflow: hidden;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .announcement-track {
+    display: flex;
+    animation: marquee 28s linear infinite;
+    white-space: nowrap;
+  }
+  .announcement-track span {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0 48px;
+  }
+  .announcement-track span em {
+    font-style: normal;
+    color: var(--grey-mid);
+    margin: 0 12px;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.4s var(--ease);
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .header-logo img {
+    height: 38px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .logo-text {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    line-height: 1;
+  }
+  .logo-text small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: 300;
+    color: var(--grey-mid);
+    margin-top: 3px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  nav a {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.25s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--white);
+    transition: width 0.3s var(--ease);
+  }
+  nav a:hover { opacity: 1; }
+  nav a:hover::after { width: 100%; }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .header-actions a {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.25s;
+    font-weight: 500;
+  }
+  .header-actions a:hover { opacity: 1; }
+  .cart-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 20px;
+    border-radius: 0;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .cart-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); opacity: 1 !important; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    height: calc(100vh - var(--header-h) - 36px);
+    min-height: 620px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.25) 0%,
+      rgba(0,0,0,0.15) 40%,
+      rgba(0,0,0,0.55) 100%
+    );
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    animation: heroReveal 1.4s var(--ease) both;
+  }
+  @keyframes heroReveal {
+    from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+    animation: heroReveal 1.4s 0.2s var(--ease) both;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(56px, 7vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 32px;
+    animation: heroReveal 1.4s 0.35s var(--ease) both;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .hero-sub {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 44px;
+    text-transform: uppercase;
+    animation: heroReveal 1.4s 0.5s var(--ease) both;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    transition: background 0.3s, transform 0.3s var(--ease);
+    animation: heroReveal 1.4s 0.65s var(--ease) both;
+  }
+  .hero-cta:hover { background: var(--off-white); transform: translateY(-2px); }
+  .hero-cta svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease); }
+  .hero-cta:hover svg { transform: translateX(4px); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.5;
+    animation: heroReveal 1.4s 1s var(--ease) both;
+  }
+  .hero-scroll span {
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--white), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.1); }
+  }
+
+  /* Section base */
+  section { padding: 120px 48px; }
+
+  /* Studio Selects */
+  .studio-selects {
+    background: var(--black);
+    padding: 120px 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+  }
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 64px);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--white);
+  }
+  .section-title em { font-style: italic; }
+  .view-all {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+    transition: opacity 0.25s;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+  }
+  .view-all:hover { opacity: 1; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .tab-btn {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--grey-mid);
+    background: none;
+    border: none;
+    padding: 12px 28px 12px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.25s;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 0; height: 1px;
+    background: var(--white);
+    transition: width 0.3s var(--ease);
+  }
+  .tab-btn.active { color: var(--white); }
+  .tab-btn.active::after { width: 100%; }
+  .tab-btn:hover { color: var(--white); }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* Product Grid */
+  /* Product scroll row — all 6 cards in one horizontal scrollable line */
+  .product-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 14px;
+    cursor: grab;
+  }
+  .product-grid:active { cursor: grabbing; }
+  .product-grid::-webkit-scrollbar { height: 2px; }
+  .product-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); }
+  .product-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 2px; }
+  .product-grid .product-card {
+    flex: 0 0 22%;
+    min-width: 210px;
+    scroll-snap-align: start;
+  }
+
+  .product-card {
+    position: relative;
+    background: transparent;
+    cursor: pointer;
+  }
+  .product-card-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    background: #1a1815;
+  }
+  .product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+    display: block;
+  }
+  .product-card:hover .product-card-image img {
+    transform: scale(1.04);
+  }
+  .product-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: background 0.35s var(--ease);
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+  .product-card:hover .product-card-overlay {
+    background: rgba(0,0,0,0.3);
+  }
+  /* Login dot badge — top right corner of image */
+  .product-login-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 2;
+    transition: transform 0.25s var(--ease), background 0.25s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  }
+  .product-login-dot:hover {
+    transform: scale(1.12);
+    background: var(--off-white);
+  }
+  .product-login-dot svg {
+    width: 12px;
+    height: 12px;
+    color: var(--black);
+  }
+  .product-login-dot::after {
+    content: 'Login to view price';
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 8px);
+    transform: translateY(-50%);
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding: 5px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .product-login-dot:hover::after { opacity: 1; }
+  .product-cta {
+    width: 100%;
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 11px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .product-card:hover .product-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .product-info {
+    padding: 10px 0 4px;
+    background: transparent;
+  }
+  .product-name {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 3px;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+  .product-meta {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .product-price { display: none; }
+  .product-swatches {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .swatch:hover { transform: scale(1.3); border-color: rgba(255,255,255,0.7); }
+  .swatch.active { border: 1.5px solid var(--white); transform: scale(1.2); }
+  .swatch-more {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    color: var(--grey-mid);
+    font-weight: 500;
+    margin-left: 1px;
+  }
+
+  /* Who We Are */
+  .who-we-are {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+  }
+  .who-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://baddogeditions.com/cdn/shop/files/BDE_paw_pic_f285bcf9-269a-41c8-9248-ab74bfe398fa.png?v=1752517493&width=1080');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.22) saturate(0.6);
+    transform: scale(1.06);
+    transition: transform 0.1s linear;
+    will-change: transform;
+  }
+  .who-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
+  }
+  .who-content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    padding: 120px 80px;
+  }
+  .who-content .section-label { margin-bottom: 16px; }
+  .who-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5vw, 80px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+  .who-title em { font-style: italic; }
+  .who-body {
+    font-size: 15px;
+    line-height: 1.85;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 44px;
+    max-width: 480px;
+  }
+  .who-body strong { color: var(--white); font-weight: 500; }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+  }
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.7);
+    transform: translateY(-2px);
+  }
+  .who-stats {
+    position: absolute;
+    right: 80px;
+    bottom: 80px;
+    z-index: 2;
+    display: flex;
+    gap: 48px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    font-weight: 500;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* Collection Section */
+  .collections {
+    background: var(--off-white);
+    color: var(--black);
+    padding: 120px 48px;
+  }
+  .collections .section-label { color: var(--grey-mid); }
+  .collections .section-title { color: var(--black); }
+  .collections .tabs { border-bottom-color: rgba(0,0,0,0.15); }
+  .collections .tab-btn { color: rgba(0,0,0,0.35); }
+  .collections .tab-btn.active { color: var(--black); }
+  .collections .tab-btn::after { background: var(--black); }
+  .collections .tab-btn:hover { color: var(--black); }
+  .collections .view-all { color: var(--black); border-bottom-color: rgba(0,0,0,0.3); }
+
+  .collection-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2px;
+  }
+  .col-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--grey-dark);
+    cursor: pointer;
+  }
+  .col-card:first-child { grid-row: span 2; }
+  .col-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 280px;
+    transition: transform 0.7s var(--ease), filter 0.6s;
+  }
+  .col-card:first-child img { min-height: 580px; }
+  .col-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.75);
+  }
+  .col-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+  }
+  .col-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .col-count {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  .col-arrow {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s, transform 0.3s var(--ease);
+  }
+  .col-card:hover .col-arrow { opacity: 1; transform: scale(1); }
+
+  /* Unleashed / Bold Section */
+  .unleashed {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+    background: var(--black);
+  }
+  .unleashed-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+    z-index: 0;
+  }
+  .unleashed-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(0,0,0,0.88) 0%,
+      rgba(0,0,0,0.5) 50%,
+      rgba(0,0,0,0.1) 100%
+    );
+    z-index: 1;
+  }
+  .unleashed-content {
+    position: relative;
+    z-index: 2;
+    padding: 100px 80px;
+    max-width: 700px;
+  }
+  .unleashed-tag {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.25);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    padding: 8px 18px;
+    margin-bottom: 32px;
+  }
+  .unleashed-title {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5.5vw, 88px);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  .unleashed-title em { font-style: italic; }
+  .unleashed-body {
+    font-size: 15px;
+    line-height: 1.85;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 44px;
+    max-width: 440px;
+  }
+  .unleashed-numbers {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 48px;
+    padding: 32px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .un-num { }
+  .un-num strong {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--white);
+    display: block;
+    line-height: 1;
+  }
+  .un-num span {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* Services Simple Grid */
+  .services {
+    background: var(--white);
+    color: var(--black);
+    padding: 100px 48px;
+  }
+  .services-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--grey-mid);
+    margin-bottom: 12px;
+  }
+  .services-heading {
+    font-family: var(--serif);
+    font-size: clamp(30px, 3.5vw, 52px);
+    font-weight: 300;
+    color: var(--black);
+    margin-bottom: 64px;
+    line-height: 1.05;
+  }
+  .services-heading em { font-style: italic; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .service-item {
+    padding: 40px 40px 40px 0;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    padding-left: 0;
+  }
+  .service-item:first-child { padding-left: 0; }
+  .service-item:last-child { border-right: none; padding-right: 0; }
+  .service-item + .service-item { padding-left: 40px; }
+  .service-item-num {
+    font-family: var(--serif);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--grey-mid);
+    letter-spacing: 0.18em;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .service-item-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 14px;
+    line-height: 1.1;
+  }
+  .service-item-body {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(0,0,0,0.55);
+  }
+  @media (max-width: 768px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .service-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); padding: 32px 0; }
+    .service-item + .service-item { padding-left: 0; }
+    .service-item:last-child { border-bottom: none; }
+  }
+
+  /* Quotes */
+  .quotes {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 100px 48px;
+  }
+  .quote-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    filter: brightness(0.2) saturate(0.5);
+    transition: opacity 1.2s var(--ease), filter 1.2s var(--ease);
+    z-index: 0;
+  }
+  .quote-slide.active {
+    opacity: 1;
+    filter: brightness(0.22) saturate(0.5);
+  }
+  .quote-overlay-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+  }
+  .quote-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 760px;
+  }
+  .quote-mark {
+    font-family: var(--serif);
+    font-size: 120px;
+    line-height: 0.5;
+    color: rgba(255,255,255,0.08);
+    display: block;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .quote-text {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.5vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--white);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s 0.3s var(--ease), transform 0.8s 0.3s var(--ease);
+  }
+  .quote-text.visible { opacity: 1; transform: translateY(0); }
+  .quote-author {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    font-weight: 500;
+    font-style: normal;
+    background: none;
+    opacity: 0;
+    transition: opacity 0.8s 0.6s var(--ease);
+  }
+  .quote-author.visible { opacity: 1; }
+  .quote-dots {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+  }
+  .quote-dot {
+    width: 4px; height: 4px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .quote-dot.active {
+    background: var(--white);
+    transform: scale(1.5);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 80px 48px 36px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .footer-tagline {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .footer-contact a {
+    display: block;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-weight: 300;
+    margin-bottom: 6px;
+    transition: color 0.25s;
+  }
+  .footer-contact a:hover { color: var(--white); }
+  .footer-col-title {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-weight: 300;
+    margin-bottom: 10px;
+    transition: color 0.25s;
+    letter-spacing: 0.05em;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    margin-top: 8px;
+  }
+  .newsletter-form input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-right: none;
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 11px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.25s;
+    letter-spacing: 0.05em;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .newsletter-form input:focus { border-color: rgba(255,255,255,0.35); }
+  .newsletter-form button {
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+  .newsletter-form button:hover { background: var(--off-white); }
+  .footer-social {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .footer-social a {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s;
+  }
+  .footer-social a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-bottom p {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.1em;
+    font-weight: 300;
+  }
+  .footer-legal {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-legal a {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.25s;
+  }
+  .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+  /* Fade-in animation utility */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+  .fade-up-delay-3 { transition-delay: 0.3s; }
+  .fade-up-delay-4 { transition-delay: 0.4s; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    header { padding: 0 24px; }
+    nav { gap: 20px; }
+    section { padding: 80px 24px; }
+    .studio-selects { padding: 80px 24px; }
+    .product-grid .product-card { flex: 0 0 44%; min-width: 160px; }
+    .collection-grid { grid-template-columns: 1fr 1fr; }
+    .col-card:first-child { grid-row: span 1; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .who-stats { right: 24px; bottom: 40px; }
+  }
+  @media (max-width: 768px) {
+    header { padding: 0 20px; }
+    nav { display: none; }
+    .hero-title { font-size: clamp(40px, 10vw, 72px); }
+    .product-grid .product-card { flex: 0 0 80%; min-width: 140px; }
+    .collection-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .services { padding: 60px 24px; }
+    .unleashed-content { padding: 60px 24px; }
+    .who-content { padding: 80px 24px; }
+    .who-stats { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement" role="banner">
+  <div class="announcement-track" id="annTrack">
+    <span>Trade-Only Wholesale Art <em>—</em> Shipping = 20% of Order <em>—</em> Over 2,000 Exclusive Works <em>—</em> Customizable Sizing, Framing & Finishes <em>—</em> Expert Designer Support <em>—</em> New 2026 Releases Available Now <em>—</em></span>
+    <span>Trade-Only Wholesale Art <em>—</em> Shipping = 20% of Order <em>—</em> Over 2,000 Exclusive Works <em>—</em> Customizable Sizing, Framing & Finishes <em>—</em> Expert Designer Support <em>—</em> New 2026 Releases Available Now <em>—</em></span>
+  </div>
+</div>
+
+<!-- Header -->
+<header id="siteHeader" role="banner">
+  <a href="https://baddogeditions.com/" class="header-logo" aria-label="Bad Dog Editions Home">
+    <img src="https://baddogeditions.com/cdn/shop/files/Baddog_Logo_final_White_nobackground_copy_2.png?v=1752266755&width=320" alt="Bad Dog Editions" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div class="logo-text" style="display:none">Bad Dog Editions<small>Trade-Only Program Art</small></div>
+  </a>
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#">Our Story</a>
+    <a href="#">The Collection</a>
+    <a href="#">Unleashed</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="header-actions">
+    <a href="#">Login</a>
+    <a href="#" class="cart-btn" aria-label="View cart">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Cart (0)
+    </a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" aria-label="Hero">
+  <video
+    class="hero-video"
+    autoplay muted loop playsinline
+    poster="https://baddogeditions.com/cdn/shop/files/preview_images/23bc2779f3a04ce8aa9cbdec5cd1faaa.thumbnail.0000000000.jpg?v=1752514289&width=3840"
+    aria-hidden="true"
+  >
+    <source src="https://baddogeditions.com/cdn/shop/videos/c/vp/23bc2779f3a04ce8aa9cbdec5cd1faaa/23bc2779f3a04ce8aa9cbdec5cd1faaa.HD-1080p-7.2Mbps-51213464.mp4?v=0" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Trade-Only Program Art</p>
+    <h1 class="hero-title">A Bold New Breed<br>of <em>Art.</em></h1>
+    <p class="hero-sub">Curated for designers who demand more</p>
+    <a href="https://baddogeditions.com/collections/art-collection" class="hero-cta" aria-label="Shop the collection">
+      Explore the Collection
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Studio Selects -->
+<section class="studio-selects" aria-labelledby="studio-title">
+  <div class="section-header fade-up">
+    <div>
+      <p class="section-label">Curated Works</p>
+      <h2 class="section-title" id="studio-title">Studio <em>Selects</em></h2>
+    </div>
+    <a href="https://baddogeditions.com/collections/bestsellers" class="view-all">
+      View All
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+
+  <div class="product-grid">
+
+      <article class="product-card">
+        <div class="product-card-image">
+          <img src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=800" alt="Cuba Libre I — Modern Caribbean art with layered colors" loading="lazy">
+          <a href="baddogeditions-pdp (2).html" class="product-login-dot" aria-label="Login to view price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <div class="product-card-overlay">
+            <a href="baddogeditions-pdp (2).html" class="product-cta" aria-label="View Cuba Libre I">View & Select Options</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Cuba Libre I</h3>
+          <p class="product-meta">Bad Dog Editions</p>
+          <p class="product-price"><a href="https://baddogeditions.com/pages/contact-us">Login to view pricing</a></p>
+          <div class="product-swatches" aria-label="Frame options">
+            <span class="swatch active" style="background:#f5f0e8" title="No Frame"></span>
+            <span class="swatch" style="background:#c8a96e" title="Beach"></span>
+            <span class="swatch" style="background:#111" title="Black"></span>
+            <span class="swatch" style="background:#2a1f14" title="Ebony"></span>
+            <span class="swatch-more">+7</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card-image">
+          <img src="https://baddogeditions.com/cdn/shop/files/DGEN-0019-Colorful_Reef_III.png?v=1752682797&width=800" alt="Colorful Reef III — Abstract reef painting" loading="lazy">
+          <a href="https://baddogeditions.com/pages/contact-us" class="product-login-dot" aria-label="Login to view price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <div class="product-card-overlay">
+            <a href="https://baddogeditions.com/products/abstract-reef-painting-coral-red-black" class="product-cta">View & Select Options</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Colorful Reef III</h3>
+          <p class="product-meta">Bad Dog Editions</p>
+          <p class="product-price"><a href="https://baddogeditions.com/pages/contact-us">Login to view pricing</a></p>
+          <div class="product-swatches">
+            <span class="swatch active" style="background:#f5f0e8" title="No Frame"></span>
+            <span class="swatch" style="background:#c8a96e" title="Beach"></span>
+            <span class="swatch" style="background:#111" title="Black"></span>
+            <span class="swatch" style="background:#2a1f14" title="Ebony"></span>
+            <span class="swatch-more">+7</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card-image">
+          <img src="https://baddogeditions.com/cdn/shop/products/00197-Beautiful_Otherness_IV.jpeg?v=1751625729&width=800" alt="Beautiful Otherness IV — Elegant abstract painting" loading="lazy">
+          <a href="https://baddogeditions.com/pages/contact-us" class="product-login-dot" aria-label="Login to view price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <div class="product-card-overlay">
+            <a href="https://baddogeditions.com/products/elegant-abstract-painting" class="product-cta">View & Select Options</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Beautiful Otherness IV</h3>
+          <p class="product-meta">Bad Dog Editions</p>
+          <p class="product-price"><a href="https://baddogeditions.com/pages/contact-us">Login to view pricing</a></p>
+          <div class="product-swatches">
+            <span class="swatch active" style="background:#f5f0e8" title="No Frame"></span>
+            <span class="swatch" style="background:#c8a96e" title="Beach"></span>
+            <span class="swatch" style="background:#111" title="Black"></span>
+            <span class="swatch" style="background:#2a1f14" title="Ebony"></span>
+            <span class="swatch-more">+7</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card-image">
+          <img src="https://baddogeditions.com/cdn/shop/products/01364-SPECTRAL_20STEMS_20II.jpeg?v=1751623211&width=800" alt="Spectral Stems II" loading="lazy">
+          <a href="https://baddogeditions.com/pages/contact-us" class="product-login-dot" aria-label="Login to view price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <div class="product-card-overlay">
+            <a href="https://baddogeditions.com/products/spectral-stems-ii" class="product-cta">View & Select Options</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Spectral Stems II</h3>
+          <p class="product-meta">Bad Dog Editions</p>
+          <p class="product-price"><a href="https://baddogeditions.com/pages/contact-us">Login to view pricing</a></p>
+          <div class="product-swatches">
+            <span class="swatch active" style="background:#f5f0e8" title="No Frame"></span>
+            <span class="swatch" style="background:#c8a96e" title="Beach"></span>
+            <span class="swatch" style="background:#111" title="Black"></span>
+            <span class="swatch" style="background:#2a1f14" title="Ebony"></span>
+            <span class="swatch-more">+7</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card-image">
+          <img src="https://baddogeditions.com/cdn/shop/products/01031-Solidified_20Umber_20IV.jpeg?v=1751633142&width=800" alt="Solidified Umber IV" loading="lazy">
+          <a href="https://baddogeditions.com/pages/contact-us" class="product-login-dot" aria-label="Login to view price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <div class="product-card-overlay">
+            <a href="https://baddogeditions.com/products/solidified-umber-iv" class="product-cta">View & Select Options</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Solidified Umber IV</h3>
+          <p class="product-meta">Bad Dog Editions</p>
+          <p class="product-price"><a href="https://baddogeditions.com/pages/contact-us">Login to view pricing</a></p>
+          <div class="product-swatches">
+            <span class="swatch active" style="background:#c8a96e" title="Beach"></span>
+            <span class="swatch" style="background:#111" title="Black"></span>
+            <span class="swatch" style="background:#2a1f14" title="Ebony"></span>
+            <span class="swatch" style="background:#3b2510" title="Espresso"></span>
+            <span class="swatch-more">+7</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card-image">
+          <img src="https://baddogeditions.com/cdn/shop/products/01821-Sunburst_20III_8b0d7690-8464-4ce9-ab00-a84526bde530.jpeg?v=1751456655&width=800" alt="Sunburst III" loading="lazy">
+          <a href="https://baddogeditions.com/pages/contact-us" class="product-login-dot" aria-label="Login to view price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <div class="product-card-overlay">
+            <a href="https://baddogeditions.com/products/sunburst-iii" class="product-cta">View & Select Options</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Sunburst III</h3>
+          <p class="product-meta">Bad Dog Editions</p>
+          <p class="product-price"><a href="https://baddogeditions.com/pages/contact-us">Login to view pricing</a></p>
+          <div class="product-swatches">
+            <span class="swatch active" style="background:#f5f0e8" title="No Frame"></span>
+            <span class="swatch" style="background:#c8a96e" title="Beach"></span>
+            <span class="swatch" style="background:#111" title="Black"></span>
+            <span class="swatch" style="background:#2a1f14" title="Ebony"></span>
+            <span class="swatch-more">+7</span>
+          </div>
+        </div>
+      </article>
+    </div>
+</section>
+
+<!-- Who We Are -->
+<section class="who-we-are" aria-labelledby="who-title">
+  <div class="who-bg" id="whoBg" role="img" aria-label="Painting background"></div>
+  <div class="who-overlay" aria-hidden="true"></div>
+  <div class="who-content">
+    <p class="section-label fade-up">Our Mission</p>
+    <h2 class="who-title fade-up fade-up-delay-1" id="who-title">Who We <em>Are.</em></h2>
+    <p class="who-body fade-up fade-up-delay-2">
+      At <strong>Bad Dog Editions</strong>, we don't seek approval—we set the pace. After a discerning look at the art industry, we knew there was a smarter, more intentional way forward. Our mission? To liberate Program Art from the ordinary, giving designers the freedom to curate without constraint.
+      <br><br>
+      Discover how our <strong>customizable</strong> Program Art aligns with your unique aesthetic.
+    </p>
+    <a href="https://baddogeditions.com/pages/about-us-1" class="btn-outline fade-up fade-up-delay-3" aria-label="Learn our story">
+      Our Story
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="who-stats" aria-label="Key statistics">
+    <div class="stat-item fade-up">
+      <span class="stat-num">2K+</span>
+      <span class="stat-label">Exclusive Works</span>
+    </div>
+    <div class="stat-item fade-up fade-up-delay-1">
+      <span class="stat-num">11+</span>
+      <span class="stat-label">Frame Finishes</span>
+    </div>
+    <div class="stat-item fade-up fade-up-delay-2">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Trade Only</span>
+    </div>
+  </div>
+</section>
+
+<!-- Collections -->
+<section class="collections" aria-labelledby="collections-title">
+  <div class="section-header fade-up">
+    <div>
+      <p class="section-label">Curated Categories</p>
+      <h2 class="section-title" id="collections-title">The <em>Collection</em></h2>
+    </div>
+    <a href="https://baddogeditions.com/collections/art-collection" class="view-all">
+      All Editions
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tabs fade-up fade-up-delay-1" role="tablist" aria-label="Collection categories">
+    <button class="tab-btn active" onclick="switchCollTab(this,'all-col')" role="tab" aria-selected="true">All</button>
+    <button class="tab-btn" onclick="switchCollTab(this,'coastal-col')" role="tab" aria-selected="false">Coastal Edit</button>
+    <button class="tab-btn" onclick="switchCollTab(this,'winter-col')" role="tab" aria-selected="false">Winter Edit</button>
+    <button class="tab-btn" onclick="switchCollTab(this,'releases-col')" role="tab" aria-selected="false">2026 Releases</button>
+  </div>
+
+  <div id="all-col" class="tab-pane active" role="tabpanel">
+    <div class="collection-grid fade-up">
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=1000" alt="Studio Selects Collection" loading="lazy">
+        <div class="col-overlay">
+          <h3 class="col-name">Studio Selects</h3>
+          <p class="col-count">6 Works</p>
+        </div>
+        <div class="col-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00838-PALMETTO_20FALSETTO_20I.jpeg?v=1751624574&width=600" alt="Coastal Edit Collection" loading="lazy">
+        <div class="col-overlay">
+          <h3 class="col-name">Coastal Edit</h3>
+          <p class="col-count">Summer Collection</p>
+        </div>
+        <div class="col-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/01821-Sunburst_20III_8b0d7690-8464-4ce9-ab00-a84526bde530.jpeg?v=1751456655&width=600" alt="2026 Releases" loading="lazy">
+        <div class="col-overlay">
+          <h3 class="col-name">2026 Releases</h3>
+          <p class="col-count">New This Season</p>
+        </div>
+        <div class="col-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00116-Abstracted_20Serenity_20I.jpeg?v=1751628763&width=600" alt="The Winter Edit" loading="lazy">
+        <div class="col-overlay">
+          <h3 class="col-name">Winter Edit</h3>
+          <p class="col-count">Curated Seasonals</p>
+        </div>
+        <div class="col-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="coastal-col" class="tab-pane" role="tabpanel">
+    <div class="collection-grid fade-up">
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/01715-Gorgonia_20V.jpeg?v=1751456782&width=1000" alt="Gorgonia V" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Gorgonia V</h3><p class="col-count">Coastal Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00838-PALMETTO_20FALSETTO_20I.jpeg?v=1751624574&width=600" alt="Palmetto Falsetto I" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Palmetto Falsetto I</h3><p class="col-count">Coastal Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00483-Fish_20Scales.jpeg?v=1751634167&width=600" alt="Fish Scales" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Fish Scales</h3><p class="col-count">Coastal Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/files/MPUL-0046-FishermanII.png?v=1753300283&width=600" alt="Fisherman II" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Fisherman II</h3><p class="col-count">Coastal Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div id="winter-col" class="tab-pane" role="tabpanel">
+    <div class="collection-grid fade-up">
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00116-Abstracted_20Serenity_20I.jpeg?v=1751628763&width=1000" alt="Abstracted Serenity I" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Abstracted Serenity I</h3><p class="col-count">Winter Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00117-Abstracted_20Serenity_20II.jpeg?v=1751628762&width=600" alt="Abstracted Serenity II" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Abstracted Serenity II</h3><p class="col-count">Winter Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/01031-Solidified_20Umber_20IV.jpeg?v=1751633142&width=600" alt="Solidified Umber IV" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Solidified Umber IV</h3><p class="col-count">Winter Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/products/00197-Beautiful_Otherness_IV.jpeg?v=1751625729&width=600" alt="Beautiful Otherness IV" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Beautiful Otherness IV</h3><p class="col-count">Winter Edit</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div id="releases-col" class="tab-pane" role="tabpanel">
+    <div class="collection-grid fade-up">
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/files/MPUL-0046-FishermanII.png?v=1753300283&width=1000" alt="Fisherman II" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Fisherman II</h3><p class="col-count">2026 Release</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=600" alt="Cuba Libre I" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Cuba Libre I</h3><p class="col-count">2026 Release</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="col-card">
+        <img src="https://baddogeditions.com/cdn/shop/files/DGEN-0019-Colorful_Reef_III.png?v=1752682797&width=600" alt="Colorful Reef III" loading="lazy">
+        <div class="col-overlay"><h3 class="col-name">Colorful Reef III</h3><p class="col-count">2026 Release</p></div>
+        <div class="col-arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Unleashed -->
+<section class="unleashed" aria-labelledby="unleashed-title">
+  <video
+    class="unleashed-video"
+    autoplay muted loop playsinline
+    poster="https://baddogeditions.com/cdn/shop/files/preview_images/35ba260705194cb6a348edcd09e09886.thumbnail.0000000000.jpg?v=1746402150"
+    aria-hidden="true"
+  >
+    <source src="https://baddogeditions.com/cdn/shop/videos/c/vp/35ba260705194cb6a348edcd09e09886/35ba260705194cb6a348edcd09e09886.SD-480p-0.9Mbps-47001666.mp4?v=0" type="video/mp4">
+  </video>
+  <div class="unleashed-overlay" aria-hidden="true"></div>
+  <div class="unleashed-content">
+    <span class="unleashed-tag fade-up">The Philosophy</span>
+    <h2 class="unleashed-title fade-up fade-up-delay-1" id="unleashed-title">Unleashing a Bold<br>New Breed of <em>Art</em></h2>
+    <p class="unleashed-body fade-up fade-up-delay-2">
+      At Bad Dog Editions, we reject the conventional. Our curated collection of over 2,000 exclusive works challenges the boundaries of Program Art—offering designers a sharper, more intentional way to define space.
+    </p>
+    <div class="unleashed-numbers fade-up fade-up-delay-3" aria-label="Key facts">
+      <div class="un-num">
+        <strong>2,000+</strong>
+        <span>Exclusive Works</span>
+      </div>
+      <div class="un-num">
+        <strong>11</strong>
+        <span>Frame Options</span>
+      </div>
+      <div class="un-num">
+        <strong>Trade</strong>
+        <span>Only Access</span>
+      </div>
+    </div>
+    <a href="https://baddogeditions.com/collections/art-collection" class="hero-cta fade-up fade-up-delay-4" aria-label="Shop all art">
+      Shop Now
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Services Simple -->
+<section class="services" aria-label="Our services">
+  <p class="services-label">What We Offer</p>
+  <h2 class="services-heading">Art that works<br><em>as hard as you do.</em></h2>
+  <div class="services-grid">
+    <div class="service-item fade-up">
+      <span class="service-item-num">01</span>
+      <h3 class="service-item-title">Customer Service</h3>
+      <p class="service-item-body">Expert support tailored to the trade. From order queries to curation advice, our team is here at every step.</p>
+    </div>
+    <div class="service-item fade-up fade-up-delay-1">
+      <span class="service-item-num">02</span>
+      <h3 class="service-item-title">Shipping</h3>
+      <p class="service-item-body">Flat 20% of your order total. Every piece packaged with meticulous care — pristine delivery, every time.</p>
+    </div>
+    <div class="service-item fade-up fade-up-delay-2">
+      <span class="service-item-num">03</span>
+      <h3 class="service-item-title">Customization</h3>
+      <p class="service-item-body">Tailored sizing, 11 framing options, and premium finishes. Every piece adapts to your vision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quotes -->
+<section class="quotes" aria-label="Client testimonials" aria-live="polite">
+  <!-- Background slides -->
+  <div class="quote-slide active" style="background-image: url('https://baddogeditions.com/cdn/shop/files/flatlay-of-clean-paint-brushes-on-a-black-surface.jpg?v=1752267777&width=2000')" role="img" aria-label="Paint brushes"></div>
+  <div class="quote-slide" style="background-image: url('https://baddogeditions.com/cdn/shop/files/Cuba_Libre_I.png?v=1752679084&width=2000')" role="img" aria-label="Cuba Libre I artwork"></div>
+  <div class="quote-slide" style="background-image: url('https://baddogeditions.com/cdn/shop/files/DGEN-0019-Colorful_Reef_III.png?v=1752682797&width=2000')" role="img" aria-label="Colorful Reef III artwork"></div>
+
+  <div class="quote-overlay-bg" aria-hidden="true"></div>
+
+  <div class="quote-content">
+    <span class="quote-mark" aria-hidden="true">"</span>
+    <blockquote>
+      <p class="quote-text visible" id="quoteText">I was blown away by the quality. The colors are vivid, the framing is immaculate, and the artwork adds instant edge to any space. Bad Dog Editions isn't just wall decor—it's a conversation starter.</p>
+      <cite class="quote-author visible" id="quoteAuthor">— Daniel R., Toronto</cite>
+    </blockquote>
+  </div>
+
+  <div class="quote-dots" role="tablist" aria-label="Testimonial navigation">
+    <button class="quote-dot active" onclick="goToQuote(0)" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+    <button class="quote-dot" onclick="goToQuote(1)" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+    <button class="quote-dot" onclick="goToQuote(2)" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo"><img src="https://baddogeditions.com/cdn/shop/files/Baddog_Logo_final_White_nobackground_copy_2.png?v=1752266755&width=320" alt="Bad Dog Editions" style="height:36px;width:auto;display:block;" onerror="this.outerHTML='Bad Dog Editions'"></span>
+      <p class="footer-tagline">A New Breed of<br>Trade-Only Wholesale Art</p>
+      <div class="footer-contact">
+        <a href="/cdn-cgi/l/email-protection#f29b9c949db2909396969d9597969b869b9d9c81dc919d9f"><span class="__cf_email__" data-cfemail="c1a8afa7ae81a3a0a5a5aea6a4a5a8b5a8aeafb2efa2aeac">[email&#160;protected]</span></a>
+        <a href="tel:+14078261197">(407) 826-1197</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/baddogeditions/" aria-label="Instagram">Instagram</a>
+        <a href="https://www.facebook.com/share/1fee73bUUB/" aria-label="Facebook">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Quick Links</p>
+      <a href="https://baddogeditions.com/search">Search</a>
+      <a href="https://baddogeditions.com/pages/faqs">FAQs</a>
+      <a href="https://baddogeditions.com/pages/about-us-1">About Us</a>
+      <a href="https://baddogeditions.com/pages/contact-us">Contact</a>
+      <a href="https://baddogeditions.com/pages/bad-dog-unleashed">Unleashed</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Collections</p>
+      <a href="https://baddogeditions.com/collections/art-collection">All Editions</a>
+      <a href="https://baddogeditions.com/collections/2026-releases">2026 Releases</a>
+      <a href="https://baddogeditions.com/collections/the-winter-edit">Winter Edit</a>
+      <a href="https://baddogeditions.com/collections/bestsellers">Studio Selects</a>
+      <a href="https://baddogeditions.com/pages/orders-returns">Orders & Returns</a>
+    </div>
+    <div>
+      <p class="footer-col-title">Stay in the Loop</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:300;margin-bottom:16px;line-height:1.6;">Weekly releases, design resources, and trade updates.</p>
+      <form class="newsletter-form" onsubmit="return false;" aria-label="Newsletter signup">
+        <label for="newsletter-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Email address</label>
+        <input type="email" id="newsletter-email" placeholder="Your email address" autocomplete="email">
+        <button type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Bad Dog Editions. Powered by Shopify.</p>
+    <div class="footer-legal">
+      <a href="https://baddogeditions.com/policies/refund-policy">Refund Policy</a>
+      <a href="https://baddogeditions.com/policies/terms-of-service">Terms of Service</a>
+      <a href="https://baddogeditions.com/pages/privacy-security">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Tabs - Studio Selects
+  function switchTab(btn, id) {
+    if (btn.classList.contains('active')) return;
+    document.querySelectorAll('.studio-selects .tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    // Hide all panes EXCEPT the one we're switching to
+    document.querySelectorAll('.studio-selects .tab-pane').forEach(p => {
+      if (p.id !== id) p.classList.remove('active');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+    const pane = document.getElementById(id);
+    if (!pane) return;
+    pane.classList.add('active');
+    pane.querySelectorAll('.product-card').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+  window.switchTab = switchTab;
+
+  // Force all product cards always visible regardless of scroll observer
+  document.querySelectorAll('.product-card').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    el.classList.add('visible');
+  });
+
+  // Tabs - Collections
+  function switchCollTab(btn, id) {
+    document.querySelectorAll('.collections .tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.querySelectorAll('.collections .tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+    const pane = document.getElementById(id);
+    if (pane) pane.classList.add('active');
+  }
+  window.switchCollTab = switchCollTab;
+
+  // Scroll fade-up animations — unobserve after triggering so state is permanent
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Parallax on Who We Are
+  const whoBg = document.getElementById('whoBg');
+  if (whoBg) {
+    window.addEventListener('scroll', () => {
+      const sec = whoBg.closest('section');
+      if (!sec) return;
+      const rect = sec.getBoundingClientRect();
+      const progress = -rect.top / window.innerHeight;
+      whoBg.style.transform = `scale(1.06) translateY(${progress * 30}px)`;
+    }, { passive: true });
+
+    const whoSection = document.querySelector('.who-we-are');
+    if (whoSection) {
+      whoSection.addEventListener('mousemove', e => {
+        const rect = whoSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        whoBg.style.transform = `scale(1.08) translate(${x * 18}px, ${y * 12}px)`;
+      });
+      whoSection.addEventListener('mouseleave', () => {
+        whoBg.style.transform = 'scale(1.06) translate(0,0)';
+      });
+    }
+  }
+
+  // Quotes rotation
+  const quotes = [
+    { text: "I was blown away by the quality. The colors are vivid, the framing is immaculate, and the artwork adds instant edge to any space. Bad Dog Editions isn't just wall decor—it's a conversation starter.", author: "— Daniel R., Toronto" },
+    { text: "I've bought from dozens of art websites, but nothing compares to the originality and punch of Bad Dog Editions. Their curation is on point. The piece I chose makes my office feel alive—bold, modern, and unapologetic.", author: "— Aisha M." },
+    { text: "From the moment I placed my order to the day it arrived, everything was seamless. The packaging was pristine, and the print quality exceeded my expectations. This isn't mass-produced art—it's premium work.", author: "— Marco D." },
+  ];
+  let currentQ = 0;
+  const qText = document.getElementById('quoteText');
+  const qAuthor = document.getElementById('quoteAuthor');
+  const qSlides = document.querySelectorAll('.quote-slide');
+  const qDots = document.querySelectorAll('.quote-dot');
+
+  function goToQuote(idx) {
+    if (!qText || !qAuthor || !qSlides.length || !qDots.length) return;
+    qText.classList.remove('visible');
+    qAuthor.classList.remove('visible');
+    if (qSlides[currentQ]) qSlides[currentQ].classList.remove('active');
+    if (qDots[currentQ]) { qDots[currentQ].classList.remove('active'); qDots[currentQ].setAttribute('aria-selected','false'); }
+    currentQ = idx;
+    setTimeout(() => {
+      qText.textContent = quotes[currentQ].text;
+      qAuthor.textContent = quotes[currentQ].author;
+      if (qSlides[currentQ]) qSlides[currentQ].classList.add('active');
+      if (qDots[currentQ]) { qDots[currentQ].classList.add('active'); qDots[currentQ].setAttribute('aria-selected','true'); }
+      setTimeout(() => { qText.classList.add('visible'); qAuthor.classList.add('visible'); }, 80);
+    }, 400);
+  }
+  window.goToQuote = goToQuote;
+
+  setInterval(() => { goToQuote((currentQ + 1) % quotes.length); }, 6000);
+
+});
+</script>
+</body>
+</html>
